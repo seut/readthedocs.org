@@ -54,8 +54,7 @@
 {% if project.get_latest_build.success %}
   <h3>Short URLs</h3>
   <p>
-      <a href="http://{{ project.slug}}.readthedocs.org">{{ project.slug }}.readthedocs.org</a><br>
-      <a href="http://{{ project.slug}}.rtfd.org">{{ project.slug }}.rtfd.org</a>
+      <a href="http://{{ project.slug}}.{{ request.META.HTTP_HOST }}">{{ project.slug }}.{{ request.META.HTTP_HOST }}</a><br>
   </p>
 {% endif %}
 
@@ -120,7 +119,7 @@
 
 {% if request.user in project.users.all %}
   <h3>Post Commit Hook</h3>
-    <p>http://readthedocs.org{% url generic_build project.pk %}</p>
+    <p>http://{{ request.META.HTTP_HOST }}{% url generic_build project.pk %}</p>
 {% endif %}
 
 <form method="post" action="{% url generic_build project.pk %}">
